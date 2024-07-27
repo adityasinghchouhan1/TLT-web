@@ -1,4 +1,4 @@
-const backendDomain = "http://localhost:8092";
+const backendDomain = "http://localhost:7070";
 
 const SummaryApi = {
   fastTrackForm: {
@@ -33,7 +33,11 @@ const SummaryApi = {
     method: "get",
   },
   prevPaper: {
-    url: `${backendDomain}/api/prevPaper`,
+    url: `${backendDomain}/api/pyPaper-info`,
+    method: "post",
+  },
+  pyPaper: {
+    url: `${backendDomain}/api/pyPaper-info`,
     method: "get",
   },
 };
