@@ -1,7 +1,7 @@
 const express = require('express');
 const { createRegistrationForm } = require('../controllers/registrationFormController');
 const { createPersonalInfo, getPersonalInfo } = require('../controllers/personalInfoController');
-const { getAllPyPapersDetails,createPyPapersDetails } = require('../controllers/pyPaper');
+const { getAllPyPapersDetails,createPyPapersDetails } = require('../controllers/pyPaperController');
 const router = express.Router();
 
 router.post('/fastTrackForm', createRegistrationForm);
