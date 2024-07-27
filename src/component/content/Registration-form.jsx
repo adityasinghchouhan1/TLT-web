@@ -1,9 +1,73 @@
 import React, { useState } from "react";
+import SummaryApi from "../../Common/SummaryAPI";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RegistrationForm = () => {
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
 
+  const [data, setData] = useState({
+    picture: "",
+    name: "",
+    placeOfBirth: "",
+    dateOfBirth: "",
+    fullAddress: "",
+    state: "",
+    pincode: "",
+    qualification: "",
+    collegeUniversity: "",
+    pursuingLLB: "",
+    yearOfPassing: "",
+    email: "",
+    fatherName: "",
+    motherName: "",
+    permanentAddress: "",
+    permanentState: "",
+    permanentCity: "",
+    aadharCard: "",
+    lastExamDetails: "",
+    mains: "",
+    score: "",
+    year: "",
+    feesPaid: "",
+    amountPaid: "",
+    oldStudentOfShubhamSir: "",
+    institution: "",
+  });
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const contactResponse = await fetch(SummaryApi.fastTrackForm.url, {
+        method: SummaryApi.fastTrackForm.method,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+      const dataApi = await contactResponse.json();
+
+      if (dataApi.success) {
+        toast.success("Data is successfully submitted!");
+      } else {
+        toast.error(dataApi.message);
+      }
+
+      console.log("data", dataApi);
+    } catch (error) {
+      toast.error("An error occurred while submitting the form.");
+      console.error("Error submitting form:", error);
+    }
+  };
   const states = [
     { id: 1, name: 'Andaman and Nicobar Islands' },
     { id: 2, name: 'Andhra Pradesh' },
@@ -54,7 +118,7 @@ const RegistrationForm = () => {
     'Machilipatnam','Mangalagiri',' Markapur',' Narasaraopet','Narsipatnam','Nellore','   Nidadavole','Nuzvid','Ongole','Palasa','Piduguralla','Pithapuram','Ponnur','Proddatur',
     'Pulivendula','Punganur','Puttur',' Rajahmundry',' Rayachoti','Samalkot','Srikakulam',
     'Sullurpeta','Tadepalligudem','Tadpatri','Tenali','Tirupati','Tuni','Venkatagiri','Vijayawada','Vinukonda','Visakhapatnam','Vizianagaram','Yemmiganur'],
-//'Arunachal Pradesh'
+//'Arunachal Pradesh' 
     3: ['Aalo', 'Anini', 'Bomdila', 'Changlang', 'Daporijo', 'Hawai', 'Itanagar', 'Khonsa', 'Koloriang', 'Longding', 'Naharlagun', 'Namsai', 'Pasighat', 'Roing', 'Seppa', 'Tawang', 'Tezu', 'Yingkiong', 'Ziro'],
 // 'Assam' 
     4: ['Abhayapuri', 'Amguri', 'Badarpur', 'Baihata', 'Baksa', 'Barpeta', 'Barpeta', 'Biswanath Chariali', 'Bongaigaon', 'Dhekiajuli', 'Dhubri', 'Dibrugarh', 'Diphu', 'Doom Dooma', 'Gauripur', 'Goalpara', 'Golaghat', 'Haflong', 'Hailakandi', 'Hojai', 'Jorhat', 'Karimganj', 'Kokrajhar', 'Lakhimpur', 'Lanka', 'Lumding', 'Mangaldoi', 'Morigaon', 'Nagaon', 'Nalbari', 'North Lakhimpur', 'Pathsala', 'Rangia', 'ibsagar',  'Silchar', 'Tinsukia', 'Tezpur'],
@@ -127,18 +191,21 @@ const RegistrationForm = () => {
         </h2>
       </div>
 
-      <form className="mt-5 ">
+      <form onSubmit={handleSubmit}className="mt-5 ">
         <div className="space-y-6 sm:px-10 md:px-2 ">
           <div className="sm:flex items-center">
             <label
               htmlFor="choose-picture"
-            className="block text-left font-bold text-lg  sm:w-1/4 md:w-1/4">
+             className="block text-left font-bold text-lg  sm:w-1/4 md:w-1/4">
               Choose picture
             </label>
             <input
               type="file"
               name="choose-picture"
               id="choose-picture"
+              autoComplete="off"
+              value={data.picture}
+              onChange={handleInput}
             className="border rounded w-full p-2"/>
           </div>
 
@@ -152,6 +219,9 @@ const RegistrationForm = () => {
               type="text"
               name="name"
               id="name"
+              autoComplete="off"
+              value={data.name}
+              onChange={handleInput}
               className="border rounded w-full p-2"/>
           </div>
 
@@ -165,6 +235,9 @@ const RegistrationForm = () => {
               type="text"
               name="place-of-birth"
               id="place-of-birth"
+              autoComplete="off"
+              value={data.placeOfBirth}
+              onChange={handleInput}
               className="border rounded w-full p-2"/>
           </div>
 
@@ -178,6 +251,9 @@ const RegistrationForm = () => {
               type="date"
               name="date-of-birth"
               id="date-of-birth"
+              autoComplete="off"
+              value={data.dateOfBirth}
+              onChange={handleInput}
               className="border rounded w-full p-2"/>
           </div>
 
@@ -191,6 +267,9 @@ const RegistrationForm = () => {
               type="text"
               name="full-address"
               id="full-address"
+              autoComplete="off"
+              value={data.fullAddress}
+              onChange={handleInput}
               className="border rounded w-full p-2"/>
           </div>
 
@@ -226,6 +305,9 @@ const RegistrationForm = () => {
               type="number"
               name="pin-code"
               id="pin-code"
+              autoComplete="off"
+              value={data.pincode}
+              onChange={handleInput}
               className="border rounded w-full p-2"/>
           </div>
 
@@ -238,7 +320,10 @@ const RegistrationForm = () => {
             <input
               type="text"
               name="qualification"
-              id="qualification"
+              id="q"
+              autoComplete="off"
+              value={data.qualification}
+              onChange={handleInput}
               className="border rounded w-full p-2"/>
           </div>
 
@@ -252,6 +337,9 @@ const RegistrationForm = () => {
               type="text"
               name="college-university"
               id="college-university"
+              autoComplete="off"
+              value={data.collegeUniversity}
+              onChange={handleInput}
               className="border rounded w-full p-2"/>
           </div>
 
@@ -265,6 +353,8 @@ const RegistrationForm = () => {
                   type="radio"
                   name="pursuingLLB"
                   value="yes"
+                  autoComplete="off"
+                  onChange={handleInput}
                   className="mr-2"/>{" "}
                 Yes
               </label>
@@ -273,6 +363,8 @@ const RegistrationForm = () => {
                   type="radio"
                   name="pursuingLLB"
                   value="no"
+                  autoComplete="off"
+                  onChange={handleInput}
                   className="mr-2"/>{" "}
                 No
               </label>
@@ -288,6 +380,10 @@ const RegistrationForm = () => {
               type="number"
               name="year-of-passing"
               id="year-of-passing"
+              autoComplete="off"
+              value={data.yearOfPassing}
+              onChange={handleInput}
+
               className="border rounded w-full p-2"/>
           </div>
 
@@ -301,6 +397,9 @@ const RegistrationForm = () => {
               type="email"
               name="email"
               id="email"
+              autoComplete="off"
+              value={data.email}
+              onChange={handleInput}
               className="border rounded w-full p-2"/>
           </div>
           {/* personal details */}
@@ -319,6 +418,9 @@ const RegistrationForm = () => {
               type="text"
               name="father-name"
               id="father-name"
+              autoComplete="off"
+              value={data.fatherName}
+              onChange={handleInput}
               className="border rounded w-full p-2"/>
           </div>
 
@@ -332,6 +434,9 @@ const RegistrationForm = () => {
               type="text"
               name="mother-name"
               id="mother-name"
+              autoComplete="off"
+              value={data.motherName}
+              onChange={handleInput}
               className="border rounded w-full p-2"/>
           </div>
 
@@ -345,6 +450,9 @@ const RegistrationForm = () => {
               type="text"
               name="permanent-address"
               id="permanent-address"
+              autoComplete="off"
+              value={data.permanentAddress}
+              onChange={handleInput}
               className="border rounded w-full p-2"/>
           </div>
 
@@ -404,6 +512,9 @@ const RegistrationForm = () => {
               type="file"
               name="aadhar-card"
               id="aadhar-card"
+              autoComplete="off"
+              value={data.yearOfPassing}
+              onChange={handleInput}
               className="border rounded w-full p-2"/>
           </div>
   {/* last exam */}

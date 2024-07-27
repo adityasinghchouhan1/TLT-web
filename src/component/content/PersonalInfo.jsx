@@ -79,6 +79,10 @@
 //     ) {
 //       navigate("/jet/guardiandetails");
 //     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
 //   };
 
 //   return (
@@ -370,6 +374,7 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 
 const PersonalInfo = () => {
   const navigate = useNavigate();
@@ -402,10 +407,35 @@ const PersonalInfo = () => {
       [name]: value,
     });
   };
+=======
+import SummaryApi from "../../Common/SummaryAPI";
 
-  const handleSumbit = (event) => {
+
+const PersonalInfo = () => {
+  const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [number, setNumber] = useState("");
+  const [category, setCategory] = useState("");
+  const [address, setAddress] = useState("");
+  const [dob, setDOB] = useState("");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
+
+  const [nameAlert, setNameAlert] = useState(false);
+  const [emailAlert, setEmailAlert] = useState(false);
+  const [numberAlert, setNumberAlert] = useState(false);
+  const [categoryAlert, setCategoryAlert] = useState(false);
+  const [addressAlert, setAddressAlert] = useState(false);
+  const [dobAlert, setDOBAlert] = useState(false);
+  const [stateAlert, setStateAlert] = useState(false);
+  const [cityAlert, setCityAlert] = useState(false);
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
+<<<<<<< HEAD
     let newAlerts = {
       name: formData.name === "",
       email: formData.email === "",
@@ -421,6 +451,60 @@ const PersonalInfo = () => {
 
     if (!Object.values(newAlerts).includes(true)) {
       navigate("/jet/guardiandetails");
+=======
+    const alerts = {
+      name: name === "",
+      email: email === "",
+      number: number === "",
+      category: category === "",
+      address: address === "",
+      dob: dob === "",
+      state: state === "",
+      city: city === "",
+    };
+
+    setNameAlert(alerts.name);
+    setEmailAlert(alerts.email);
+    setNumberAlert(alerts.number);
+    setCategoryAlert(alerts.category);
+    setAddressAlert(alerts.address);
+    setDOBAlert(alerts.dob);
+    setStateAlert(alerts.state);
+    setCityAlert(alerts.city);
+
+    if (Object.values(alerts).some((alert) => alert)) {
+      return;
+    }
+
+    const formData = {
+      name,
+      email,
+      number,
+      category,
+      address,
+      dob,
+      state,
+      city,
+    };
+
+    try {
+      const response = await fetch(SummaryApi.personal-info.url, {
+        // method: "POST",
+        method: SummaryApi.personal-info.method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        navigate("/jet/guardiandetails");
+      } else {
+        console.error("Failed to submit form data");
+      }
+    } catch (error) {
+      console.error("Error submitting form data", error);
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
     }
   };
 
@@ -430,7 +514,7 @@ const PersonalInfo = () => {
         <h1 className="mt-10 text-3xl font-[800] mb-5 text-primary-marineBlue">
           Personal info
         </h1>
-        <form onSubmit={handleSumbit} className="flex flex-col">
+        <form onSubmit={handleSubmit} className="flex flex-col">
           <div className="form-wrapper flex flex-wrap flex-col relative">
             <div className="flex flex-wrap sm:flex-nowrap">
               {/* --------- Name --------- */}
@@ -445,14 +529,19 @@ const PersonalInfo = () => {
                     alerts.name
                       ? "focus:outline-primary-strawberryRed"
                       : "focus:outline-primary-marineBlue"
-                  } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3 `}
+                  } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3`}
                   type="text"
                   placeholder="e.g.Stephen King"
                 />
                 <span
                   className={`${
+<<<<<<< HEAD
                     alerts.name ? "inline" : "hidden"
                   } text-primary-strawberryRed font-[500] text-sm `}
+=======
+                    nameAlert ? "inline" : "hidden"
+                  } text-primary-strawberryRed font-[500] text-sm`}
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
                 >
                   This field is required
                 </span>
@@ -476,12 +565,16 @@ const PersonalInfo = () => {
                 </label>
                 <span
                   className={`${
+<<<<<<< HEAD
                     alerts.name ? "inline" : "hidden"
                   } text-primary-strawberryRed font-[500] text-sm `}
+=======
+                    nameAlert ? "inline" : "hidden"
+                  } text-primary-strawberryRed font-[500] text-sm`}
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
                 >
                   This field is required
                 </span>
-
                 {/* --- female--- */}
                 <label className="flex justify-center items-center text-primary-marineBlue font-[500] mb-2">
                   Female
@@ -490,7 +583,10 @@ const PersonalInfo = () => {
                       setFormData({ ...formData, gender: "female" })
                     }
                     className={`mx-2 jinput ${
+<<<<<<< HEAD
                       alerts.name
+=======
+                      nameAlert
                         ? "focus:outline-primary-strawberryRed"
                         : "focus:outline-primary-marineBlue"
                     }`}
@@ -498,9 +594,31 @@ const PersonalInfo = () => {
                     placeholder="e.g.Stephen King"
                   />
                 </label>
-
                 <span
                   className={`${
+                    nameAlert ? "inline" : "hidden"
+                  } text-primary-strawberryRed font-[500] text-sm`}
+                >
+                  This field is required
+                </span>
+                {/* --- Other--- */}
+                <label className="flex justify-center items-center text-primary-marineBlue font-[500] mb-2">
+                  Other
+                  <input
+                    onChange={(e) => setName(e.target.value)}
+                    className={`jinput mx-2 ${
+                      nameAlert
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
+                        ? "focus:outline-primary-strawberryRed"
+                        : "focus:outline-primary-marineBlue"
+                    }`}
+                    type="checkbox"
+                    placeholder="e.g.Stephen King"
+                  />
+                </label>
+                <span
+                  className={`${
+<<<<<<< HEAD
                     alerts.name ? "inline" : "hidden"
                   } text-primary-strawberryRed font-[500] text-sm `}
                 >
@@ -527,6 +645,10 @@ const PersonalInfo = () => {
                   className={`${
                     alerts.name ? "inline" : "hidden"
                   } text-primary-strawberryRed font-[500] text-sm `}
+=======
+                    nameAlert ? "inline" : "hidden"
+                  } text-primary-strawberryRed font-[500] text-sm`}
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
                 >
                   This field is required
                 </span>
@@ -539,20 +661,31 @@ const PersonalInfo = () => {
                   Category
                 </label>
                 <input
+<<<<<<< HEAD
                   name="category"
                   onChange={handleChange}
                   className={`jinput ${
                     alerts.category
+=======
+                  onChange={(e) => setCategory(e.target.value)}
+                  className={`jinput ${
+                    categoryAlert
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
                       ? "focus:outline-primary-strawberryRed"
                       : "focus:outline-primary-marineBlue"
-                  } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3 `}
+                  } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3`}
                   type="text"
                   placeholder="e.g.General"
                 />
                 <span
                   className={`${
+<<<<<<< HEAD
                     alerts.category ? "inline" : "hidden"
                   } text-primary-strawberryRed text-sm `}
+=======
+                    categoryAlert ? "inline" : "hidden"
+                  } text-primary-strawberryRed text-sm`}
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
                 >
                   This field is required
                 </span>
@@ -563,10 +696,16 @@ const PersonalInfo = () => {
                   DOB
                 </label>
                 <input
+<<<<<<< HEAD
                   name="dob"
                   onChange={handleChange}
                   className={`jinput ${
                     alerts.dob
+=======
+                  onChange={(e) => setDOB(e.target.value)}
+                  className={`jinput ${
+                    dobAlert
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
                       ? "focus:outline-primary-strawberryRed"
                       : "focus:outline-primary-marineBlue"
                   } outline outline-1 outline-neutral-lightGray rounded-[4px]`}
@@ -574,7 +713,11 @@ const PersonalInfo = () => {
                 />
                 <span
                   className={`${
+<<<<<<< HEAD
                     alerts.dob ? "inline" : "hidden"
+=======
+                    dobAlert ? "inline" : "hidden"
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
                   } text-primary-strawberryRed text-sm`}
                 >
                   This field is required
@@ -588,10 +731,16 @@ const PersonalInfo = () => {
                   Email Address
                 </label>
                 <input
+<<<<<<< HEAD
                   name="email"
                   onChange={handleChange}
                   className={`jinput ${
                     alerts.email
+=======
+                  onChange={(e) => setEmail(e.target.value)}
+                  className={`jinput ${
+                    emailAlert
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
                       ? "focus:outline-primary-strawberryRed"
                       : "focus:outline-primary-marineBlue"
                   } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3`}
@@ -600,7 +749,11 @@ const PersonalInfo = () => {
                 />
                 <span
                   className={`${
+<<<<<<< HEAD
                     alerts.email ? "inline" : "hidden"
+=======
+                    emailAlert ? "inline" : "hidden"
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
                   } text-primary-strawberryRed font-[500] text-sm`}
                 >
                   This field is required
@@ -612,31 +765,43 @@ const PersonalInfo = () => {
                   Phone Number
                 </label>
                 <input
+<<<<<<< HEAD
                   name="number"
                   onChange={handleChange}
                   className={`jinput ${
                     alerts.number
+=======
+                  onChange={(e) => setNumber(e.target.value)}
+                  className={`jinput ${
+                    numberAlert
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
                       ? "focus:outline-primary-strawberryRed"
                       : "focus:outline-primary-marineBlue"
                   } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3`}
                   type="text"
-                  placeholder="e.g. +1 234 567 890"
+                  placeholder="e.g.+1 234 567 890"
                 />
                 <span
                   className={`${
+<<<<<<< HEAD
                     alerts.number ? "inline" : "hidden"
                   } text-primary-strawberryRed font-[500] text-sm`}
+=======
+                    numberAlert ? "inline" : "hidden"
+                  } text-primary-strawberryRed text-sm`}
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
                 >
                   This field is required
                 </span>
               </div>
             </div>
-            {/* ----------- Address ------------- */}
-            <div className="flex flex-col w-[100%]">
-              <label className="text-primary-marineBlue font-[500] mb-1 mt-5">
+            {/*--------------Address-------------- */}
+            <div className="flex flex-col">
+              <label className="text-primary-marineBlue font-[500] mb-2 mt-5">
                 Address
               </label>
               <input
+<<<<<<< HEAD
                 name="address"
                 onChange={handleChange}
                 className={`jinput ${
@@ -644,68 +809,115 @@ const PersonalInfo = () => {
                     ? "focus:outline-primary-strawberryRed"
                     : "focus:outline-primary-marineBlue"
                 } outline outline-1 outline-neutral-lightGray rounded-[4px] w-[95%] p-3`}
+=======
+                onChange={(e) => setAddress(e.target.value)}
+                className={`jinput ${
+                  addressAlert
+                    ? "focus:outline-primary-strawberryRed"
+                    : "focus:outline-primary-marineBlue"
+                } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3`}
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
                 type="text"
-                placeholder="e.g.Address"
+                placeholder="e.g.123 Main Street"
               />
               <span
                 className={`${
+<<<<<<< HEAD
                   alerts.address ? "inline" : "hidden"
                 } text-primary-strawberryRed font-[500] text-sm`}
+=======
+                  addressAlert ? "inline" : "hidden"
+                } text-primary-strawberryRed text-sm`}
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
               >
                 This field is required
               </span>
             </div>
+<<<<<<< HEAD
             {/*-------------- State-------------- */}
             <div className="flex flex-wrap sm:flex-nowrap">
               <div className="flex flex-col w-[50%]">
+=======
+            {/*--------------State-------------- */}
+            <div className="flex flex-wrap sm:flex-nowrap">
+              <div className="flex flex-col w-[100%] sm:w-[50%]">
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
                 <label className="text-primary-marineBlue font-[500] mb-2 mt-5">
                   State
                 </label>
                 <input
+<<<<<<< HEAD
                   name="state"
                   onChange={handleChange}
                   className={`jinput ${
                     alerts.state
+=======
+                  onChange={(e) => setState(e.target.value)}
+                  className={`jinput ${
+                    stateAlert
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
                       ? "focus:outline-primary-strawberryRed"
                       : "focus:outline-primary-marineBlue"
                   } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3`}
                   type="text"
-                  placeholder="State"
+                  placeholder="e.g.California"
                 />
                 <span
+<<<<<<< HEAD
                   className={`jinput ${
                     alerts.state ? "inline" : "hidden"
                   } text-primary-strawberryRed font-[500] text-sm`}
+=======
+                  className={`${
+                    stateAlert ? "inline" : "hidden"
+                  } text-primary-strawberryRed text-sm`}
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
                 >
                   This field is required
                 </span>
               </div>
               {/*--------------City-------------- */}
-              <div className="flex flex-col w-[50%]">
+              <div className="flex flex-col w-[100%] sm:w-[50%]">
                 <label className="text-primary-marineBlue font-[500] mb-2 mt-5">
                   City
                 </label>
                 <input
+<<<<<<< HEAD
                   name="city"
                   onChange={handleChange}
                   className={`jinput ${
                     alerts.city
+=======
+                  onChange={(e) => setCity(e.target.value)}
+                  className={`jinput ${
+                    cityAlert
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
                       ? "focus:outline-primary-strawberryRed"
                       : "focus:outline-primary-marineBlue"
                   } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3`}
                   type="text"
+<<<<<<< HEAD
                   placeholder="City"
                 />
                 <span
                   className={`${
                     alerts.city ? "inline" : "hidden"
                   } text-primary-strawberryRed font-[500] text-sm`}
+=======
+                  placeholder="e.g.Los Angeles"
+                />
+                <span
+                  className={`${
+                    cityAlert ? "inline" : "hidden"
+                  } text-primary-strawberryRed text-sm`}
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
                 >
                   This field is required
                 </span>
               </div>
             </div>
           </div>
+<<<<<<< HEAD
           <div className="flex justify-end items-end mt-5">
             <button
               className="bg-primary lg:mr-6 text-white border-0 rounded-md px-6 py-3 transition-all duration-300 hover:opacity-75"
@@ -714,6 +926,14 @@ const PersonalInfo = () => {
               Next Step
             </button>
           </div>
+=======
+          <button
+            type="submit"
+            className="mt-10 bg-primary-marineBlue text-white rounded-[4px] p-3"
+          >
+            Next Step
+          </button>
+>>>>>>> 7c4417a0e402d950b173ec7dc72dadc423a446b1
         </form>
       </div>
     </div>
