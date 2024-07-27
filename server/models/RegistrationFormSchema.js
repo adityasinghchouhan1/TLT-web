@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const RegistrationFormSchema = new mongoose.Schema({
   picture: {
-    type: String,
+    type: Buffer,
     required: true
   },
   name: {
@@ -71,7 +71,7 @@ const RegistrationFormSchema = new mongoose.Schema({
     required: true
   },
   aadharCard: {
-    type: String,
+    type: Buffer,
     required: true
   },
   lastExamDetails: {
