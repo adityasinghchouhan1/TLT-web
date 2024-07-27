@@ -15,6 +15,11 @@ const SummaryApi = {
     url: `${backendDomain}/api/jetForm`,
     method: "get",
   },
+  PersonalInfo: {
+    url: `${backendDomain}/api/personal-info`,
+    method: "post",
+  },
+
   contactForm: {
     url: `${backendDomain}/api/contactForm`,
     method: "get",
