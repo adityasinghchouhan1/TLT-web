@@ -1,4 +1,4 @@
-const pyPapersDetails = require('../models/pyPapersDetails');
+const pyPapersDetails = require('../models/pyPaper');
 
 // Create a new pyPapersDetails document
 const createPyPapersDetails = async (req, res) => {
