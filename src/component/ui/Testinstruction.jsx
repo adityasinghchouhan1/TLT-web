@@ -1,11 +1,16 @@
 import React from "react";
 import { instructiondata } from "../data/instructiondata";
 import Testinstruction2 from "./Testinstruction2";
+import { NavLink } from "react-router-dom";
 const Testinstruction = () => {
   return (
     <>
       {instructiondata.map((items, index) => (
-        <div className="flex flex-col justify-center px-20">
+        <div
+          className="flex flex-col justify-center px-5
+           sm:px-20 "
+          key={index}
+        >
           <h6 className="text-primary font-bold text-3xl my-5">
             General Instructions:
           </h6>
@@ -80,11 +85,12 @@ const Testinstruction = () => {
             <li>{items.in15}</li>
             <li>{items.in16}</li>
           </dl>
-          <button className="bg-primary font-bold text-white w-20 p-2 rounded-md mt-3">
+          <NavLink
+            to="/Testinstruction2"
+            className="bg-primary  flex justify-center text-center font-bold text-white w-20 p-2 rounded-md mt-3 mb-2"
+          >
             Next
-          </button>
-
-          <Testinstruction2></Testinstruction2>
+          </NavLink>
         </div>
       ))}
     </>
