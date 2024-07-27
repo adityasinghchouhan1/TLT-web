@@ -1,5 +1,5 @@
 // controllers/personalInfoController.js
-const PersonalInfo = require('../models/PersonalInfo');
+const PersonalInfo = require('../models/personalInfo');
 
 exports.createPersonalInfo = async (req, res) => {
   try {
