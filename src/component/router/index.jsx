@@ -87,14 +87,12 @@ export const router = createBrowserRouter([
         element: <RegistrationDetails />,
       },
       {
-        path: "mockTest/subjectTest/*",
+        path: "mockTest/subjectTest",
         element: <SubjectTestCard />,
-        children: [
-          {
-            path: "Testinstruction",
-            element: <Testinstruction />,
-          },
-        ],
+      },
+      {
+        path: "Testinstruction",
+        element: <Testinstruction />,
       },
       // {
       //   path: "login-admin",

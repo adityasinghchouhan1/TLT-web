@@ -114,10 +114,7 @@ const RegistrationFormSchema = new mongoose.Schema({
     enum: ['yes', 'no'],
     required: true
   },
-  institution: {
-    type: String,
-    required: true
-  }
+  institution: String,
 });
 
 module.exports = mongoose.model('RegistrationForm', RegistrationFormSchema);
