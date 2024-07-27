@@ -25,8 +25,8 @@ const Testinstruction = () => {
             <li>{items.in5}</li>
             <li>{items.in6}</li>
             <table className="my-5 p-10">
-              <tbody className="border bottom-2 m-5 gap-6">
-                <tr className="border border-1">
+              <tbody className="border bottom-2 m-5 gap-6 ">
+                <tr className="border border-1 gap-8">
                   <th>{items.t_heading}</th>
                   <th>{items.t_heading2}</th>
                   <th>{items.t_heading3}</th>
