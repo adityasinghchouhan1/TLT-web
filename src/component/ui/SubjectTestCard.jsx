@@ -5,7 +5,6 @@ import { FaSortNumericUp } from "react-icons/fa";
 import { IoStar } from "react-icons/io5";
 import { FaEdit } from "react-icons/fa";
 import { subjectdata } from "../data/subjecttextdata";
-import Testinstruction from "./Testinstruction";
 import { NavLink } from "react-router-dom";
 const SubjectTestCard = () => {
   return (
@@ -38,13 +37,12 @@ const SubjectTestCard = () => {
               {items.start}
             </li>
           </ul>
-          {/* <NavLink
+          <NavLink
             className="bg-primary rounded-lg py-2 px-10 mt-3"
             to="/Testinstruction"
           >
             {items.btn_content}
-          </NavLink> */}
-          <Testinstruction></Testinstruction>
+          </NavLink>
         </div>
       ))}
     </div>
